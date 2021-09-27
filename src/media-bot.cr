@@ -3,7 +3,7 @@ require "yaml"
 
 class MediaBot < Tourmaline::Client  
   def pick_file
-    path = Dir.glob("././res/*").sample.to_s
+    path = Dir.glob("res/*").sample.to_s
   end
 
   #NOTE: If the MP4 has sound, it will be sent as a file, not as a "GIF"
@@ -18,9 +18,12 @@ class MediaBot < Tourmaline::Client
   end
 end
 
+# Change working directory to media-bot
+# This is needed so the executable can be ran anywhere
+Dir.cd(File.dirname(__DIR__))
 
 
-CONFIG = File.open("././config.yaml") do |file|
+CONFIG = File.open(File.expand_path("config.yaml")) do |file|
   YAML.parse(file)
 end
 
