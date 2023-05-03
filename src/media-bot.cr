@@ -1,14 +1,14 @@
 require "tourmaline"
 require "yaml"
 
-class MediaBot < Tourmaline::Client  
+class MediaBot < Tourmaline::Client
   def pick_file(recent)
     path = Dir.glob("res/*").sample.to_s
 
     if recent != 0
       until File.info(path).modification_time < (Time.utc - recent.hours)
         path = Dir.glob("res/*").sample.to_s
-     end
+      end
     end
 
     return path
@@ -33,7 +33,7 @@ CONFIG = File.open(File.expand_path("config.yaml")) do |file|
   YAML.parse(file)
 end
 
-TOKEN = CONFIG["api-token"].to_s
+TOKEN   = CONFIG["api-token"].to_s
 CHANNEL = CONFIG["channel-id"].to_s
 
 begin
