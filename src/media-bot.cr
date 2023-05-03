@@ -14,14 +14,12 @@ class MediaBot < Tourmaline::Client
     return path
   end
 
-  #NOTE: If the MP4 has sound, it will be sent as a file, not as a "GIF"
-  #TODO: Find a way to check MP4 for sound 
   def send_file(path)
     case File.extname(path)
-    when ".gif", ".mp4"
-      send_document(CHANNEL, path)
     when ".jpg", ".jpeg", ".png"
-      send_photo(CHANNEL, path)
+      send_photo(CHANNEL, File.open(path))
+    when ".gif", ".mp4"
+      send_animation(CHANNEL, File.open(path))
     end
     File.touch(path)
   end
