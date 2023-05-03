@@ -13,6 +13,6 @@ targets:
   media-bot:
     main: src/media-bot.cr
 
-crystal: 1.1.1
+crystal: 1.8.1
 
 license: MIT
