@@ -1,10 +1,11 @@
 name: media-bot
-version: 1.1
+version: 1.2
 
 dependencies:
+  # Using fork for compatibility
   tourmaline:
-    github: protoncr/tourmaline
-    branch: master
+    github: Charibdys/tourmaline
+    branch: none-parsemode
 
 authors:
   - Charybdis

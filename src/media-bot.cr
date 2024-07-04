@@ -42,5 +42,25 @@ rescue
   recent = 0
 end
 
+privacy_policy_handler = Tourmaline::CommandHandler.new("privacy") do |ctx|
+  next unless message = ctx.message
+  next if message.date == 0 
+
+  message = message.as(Tourmaline::Message)
+
+  next unless from = message.from
+
+  ctx.client.send_message(from.id, "This bot does not collect or store any user information.")
+end
+
 bot = MediaBot.new(bot_token: TOKEN)
+bot.register(privacy_policy_handler)
+bot.set_my_commands([Tourmaline::BotCommand.new("privacy", "View the Privacy Policy for this bot")])
 bot.send_file(bot.pick_file(recent))
+
+spawn do
+  bot.poll
+end
+
+# Let the bot poll for some time to catch any requests for the Privacy Policy
+sleep 10.seconds
